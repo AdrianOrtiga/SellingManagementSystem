@@ -1,0 +1,73 @@
+﻿@using SellingManagementSystem.Models
+@model SellingManagementSystem.Models.Sell
+
+@{
+}
+
+<div>
+    @{
+        var concepts = Model.Concepts.ToList();
+     }
+    @for (int i = 0; i < Model.Concepts.Count; i++)
+    {
+        <div class="card card-body col-4 mt-2 concept-card">
+            <div class="form-group">
+                <input asp-for=@concepts[i].Id hidden />
+                <label for="ProductId">Product</label>
+                <input class="product-concept" asp-for=@concepts[i].ProductId hidden/>
+                @if(ViewData["products"] != null)
+                {
+                    var productObject = @concepts[i].Product;
+                    string productName = "";
+                    int productId = 0;
+                    if(productObject != null)
+                    {
+                        productName = productObject.Name;
+                        productId = productObject.Id;
+                    }
+                    <input class="disable-input form-control" type="text" asp-for=@concepts[i].Product.Name value=@productName list="products" onchange="fillProductId(this)" />
+                    <datalist id="products">
+                        @foreach (var product in ViewData["products"] as List<Product>)
+                        {
+                            <option value=@product.Name>@product.Id</option>
+                        }
+                    </datalist> 
+                    <input asp-for=@concepts[i].Product.Id value=@productId hidden/>
+                } else
+                {
+                    <input asp-for=@concepts[i].Product.Name class="form-control" readonly/>
+                }    
+            </div>
+            <div class="form-group">
+                <label for="PricePerUnit">Price per unit</label>  
+                <input asp-for=@concepts[i].PricePerUnit class="priceperunit-concept form-control" 
+                    value=@concepts[i].PricePerUnit
+                    readonly
+                    />
+            </div>
+            <div class="form-group">
+                <label for="Quantity">Quantity</label>
+                @if(ViewData["products"] != null)
+                {
+                    <input class="quantity-concept form-control" asp-for=@concepts[i].Quantity type="number" min="1" />
+                }else
+                {
+                    <input class="quantity-concept form-control" asp-for=@concepts[i].Quantity type="number" readonly/>
+                }
+            </div>
+            <div class="form-group">
+                <label for="Amount">amount</label>
+                @{
+                    var amount = Convert.ToDecimal(concepts[i].Quantity) * concepts[i].PricePerUnit;
+                }
+                <input class="disable-input amount-concept form-control" type="number" readonly
+                    value=@amount
+                />
+            </div>
+            @if(ViewData["products"] != null)
+            {
+                <button type="button" class="btn btn-danger" onclick="deleteConcept(this)" >Delete</button>
+            }
+        </div>
+    }
+</div>

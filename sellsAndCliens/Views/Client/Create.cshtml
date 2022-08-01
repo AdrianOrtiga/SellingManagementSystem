@@ -1,0 +1,20 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model SellingManagementSystem.Models.Client
+
+@{
+}
+
+<div class="container">
+ <form  action="create" method="post">        
+        <div class="form-group col-4">
+            <label asp-for="Name">Name</label>
+            <input asp-for="Name" type="text" class="form-control" placeholder="name">
+        </div>
+        <button type="submit" class="btn btn-success mt-2">Add Client</button>
+        <a class="btn btn-info mt-2" asp-action="Index" asp-controller="Client">Cancel</a>
+    </form>
+
+</div>

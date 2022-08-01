@@ -1,0 +1,37 @@
+﻿@using SellingManagementSystem.Models
+@model SellingManagementSystem.Models.Sell
+
+@{
+}
+
+<div class="container">
+    <h2>Sell Information</h2>
+    <form  action="edit" method="post">    
+        <input asp-for="Id" readonly hidden/>
+        <div class="form-group col-4">
+            <label asp-for="Date">Date</label>
+            <input asp-for="Date" type="datetime-local" class="form-control" readonly>
+        </div>
+        <div class="row">
+            <div class="form-group col-1 mt-2">
+                <label asp-for="ClientId"></label>
+                <input asp-for="ClientId" class="form-control" readonly/>
+            </div>
+            <div class="form-group col-3 mt-2">
+                <label asp-for="Client.Name"></label>
+                <input asp-for="Client.Name" class="form-control" readonly/>
+            </div>
+        </div>
+
+        <div class="form-group col-4">
+            <label asp-for="Total">Total</label>
+            <input asp-for="Total" type="number" class="form-control" id="total-sell-amount" readonly>
+        </div>
+    
+        <h3 class="ps-2 pt-2">Concepts</h3>
+        <div id="conceptsWrapper">
+            <partial name="_Concept" />
+        </div>
+        <a class="btn btn-info mt-2" asp-action="Index" asp-controller="Sell">Go back</a>
+    </form>
+</div>

@@ -1,0 +1,28 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model SellingManagementSystem.Models.Product
+
+@{
+}
+
+<div class="container">
+ <form  action="create" method="post">        
+        <div class="form-group col-4">
+            <label asp-for="Name">Name</label>
+            <input asp-for="Name" type="text" class="form-control" placeholder="name">
+        </div>
+        <div class="form-group col-2">
+            <label asp-for="PricePerUnit">Price per unit</label>
+            <input asp-for="PricePerUnit" type="number" min="0" class="form-control" placeholder="Price per unit" step="any"> 
+        </div>
+        <div class="form-group col-2">
+            <label asp-for="Cost">Cost (how much does the product cost)</label>
+            <input asp-for="Cost" type="number" min="0" class="form-control" placeholder="Product cost" step="any"> 
+        </div>
+        <button type="submit" class="btn btn-success mt-2">Add product</button>
+        <a class="btn btn-info mt-2" asp-action="Index" asp-controller="Product">Cancel</a>
+    </form>
+
+</div>

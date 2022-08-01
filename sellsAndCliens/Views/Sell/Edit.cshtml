@@ -1,0 +1,45 @@
+﻿@using SellingManagementSystem.Models
+@model SellingManagementSystem.Models.Sell
+
+@{
+
+}
+
+<div class="container">
+    <h2>Sell Information</h2>
+    <form  action="edit" method="post">    
+        <input asp-for="Id" readonly hidden/>
+        <div class="form-group col-4">
+            <label asp-for="Date">Date</label>
+            <input asp-for="Date" type="datetime-local" class="form-control" required>
+        </div>
+        <div class="form-group col-4 mt-2">
+            <label asp-for="ClientId"></label>
+            <input asp-for="ClientId" list="clients" class="form-control" required/>
+            <datalist id="clients">
+                @foreach (var client in ViewData["clients"] as List<Client>)
+                {
+                    <option value=@client.Id >@client.Name</option>
+                }
+            </datalist>
+        </div>
+
+        <div class="form-group col-4">
+            <label asp-for="Total">Total</label>
+            <input asp-for="Total" type="number" class="form-control" id="total-sell-amount" required readonly>
+        </div>
+        
+    
+        <h3 class="ps-2 pt-2">Concepts</h3>
+        <div id="conceptsWrapper">
+        </div>
+        <div>
+            <button type="button" class="btn btn-secondary" id="addConceptBtn">Add Concept</button>
+        </div>
+        <button type="submit" class="btn btn-success mt-2">Edit Sell</button>
+        <a class="btn btn-info mt-2" asp-action="Index" asp-controller="Sell">Cancel</a>
+    </form>
+</div>
+
+
+<script src="~/js/concepsForSell.js" asp-append-version="true"></script>
